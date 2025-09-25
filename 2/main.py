@@ -1,11 +1,17 @@
+from pathlib import Path
+
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-img = cv2.imread("odi.jpg")
+IMG_PATH = Path(__file__).resolve().parent.parent / "dataset" / "odi.jpg"
+
+img = cv2.imread(str(IMG_PATH))
+if img is None:
+    raise FileNotFoundError(f"Could not load image located at {IMG_PATH}")
 
 # Change image size
-scale_percent = 1/2
+scale_percent = 1 / 2
 width = int(img.shape[1] * scale_percent)
 height = int(img.shape[0] * scale_percent)
 dim = (width, height)
@@ -31,10 +37,10 @@ for i in range(h):
         intensity_counter[gray_image[i, j]] += 1
 
 plt.figure(1)
-plt.plot(intensity_counter, 'g', label='Odi')
-plt.legend(loc='upper right')
-plt.xlabel('Intensity')
-plt.ylabel('Quantity')
+plt.plot(intensity_counter, "g", label="Odi")
+plt.legend(loc="upper right")
+plt.xlabel("Intensity")
+plt.ylabel("Quantity")
 # plt.show()
 
 # Histogram equalization
@@ -46,16 +52,16 @@ for i in range(h):
 
 plt.figure(1, (16, 8))
 plt.subplot(1, 2, 1)
-plt.plot(intensity_counter, 'g', label='Before')
-plt.legend(loc='upper right')
-plt.xlabel('Intensity')
-plt.ylabel('Quantity')
+plt.plot(intensity_counter, "g", label="Before")
+plt.legend(loc="upper right")
+plt.xlabel("Intensity")
+plt.ylabel("Quantity")
 
 plt.subplot(1, 2, 2)
-plt.plot(equ_counter, 'r', label='After')
-plt.legend(loc='upper right')
-plt.xlabel('Intensity')
-plt.ylabel('Quantity')
+plt.plot(equ_counter, "r", label="After")
+plt.legend(loc="upper right")
+plt.xlabel("Intensity")
+plt.ylabel("Quantity")
 # plt.show()
 
 res = np.hstack((gray_image, equ))
