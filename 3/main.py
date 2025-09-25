@@ -21,6 +21,7 @@ _, img_tozero_inv = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TOZERO_INV)
 _, img_trunc = cv2.threshold(img_gray, 127, 255, cv2.THRESH_TRUNC)
 _, img_otsu = cv2.threshold(img_gray, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
+# Collect results
 thresh_result = [
     ("binary", img_binary),
     ("binary inversed", img_binary_inv),
@@ -30,17 +31,16 @@ thresh_result = [
     ("otsu", img_otsu),
 ]
 
+# Plotting
 plt.figure("Threshold Result", (6, 4))
-
 for i, (title, img) in enumerate(thresh_result):
     plt.subplot(2, 3, i + 1)
     plt.imshow(img, cmap="gray")
     plt.title(title)
     plt.axis("off")
-
-plt.tight_layout()
 plt.show()
 
+img = cv2.imread(str(IMG_PATH))
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 # Mean Filter
@@ -52,6 +52,7 @@ img_gaussian = cv2.GaussianBlur(img, (5, 5), 0)
 # Bilateral Filter
 img_bilateral = cv2.bilateralFilter(img, 9, 75, 75)
 
+# Collect results
 blur_result = [
     ("mean", img_blur),
     ("median", img_median),
@@ -59,13 +60,11 @@ blur_result = [
     ("bilateral", img_bilateral),
 ]
 
+# Plotting
 plt.figure("Blur Result", (6, 4))
-
 for i, (title, img) in enumerate(blur_result):
     plt.subplot(2, 2, i + 1)
-    plt.imshow(img, cmap="gray")
-    plt.title(img)
+    plt.imshow(img)
+    plt.title(title)
     plt.axis("off")
-
-plt.tight_layout()
 plt.show()
