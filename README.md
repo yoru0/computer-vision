@@ -10,3 +10,4 @@ Hands-on computer vision mini-projects built with Python and OpenCV. Each folder
    ```bash
    pip install -r requirements.txt
    ```
+4. Run any of the scripts in the subfolders.
