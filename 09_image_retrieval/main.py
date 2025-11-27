@@ -13,3 +13,6 @@ for filename in os.listdir(image_dir):
     hist = cv2.calcHist([img_rgb], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
 
     normalized = cv2.normalize(hist, None)
+
+    flat_hist = normalized.flatten()
+    features.append((img_name, flat_hist))
