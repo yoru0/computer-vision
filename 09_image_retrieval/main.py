@@ -16,3 +16,9 @@ for filename in os.listdir(image_dir):
 
     flat_hist = normalized.flatten()
     features.append((img_name, flat_hist))
+
+test_image_bgr = cv2.imread('assets/assets/test_image/Geography.jpg')
+test_image_rgb = cv2.cvtColor(test_image_bgr, cv2.COLOR_BGR2RGB)
+test_hist = cv2.calcHist([test_image_rgb], [0, 1, 2], None, [8, 8, 8], [0, 256, 0, 256, 0, 256])
+test_normalized = cv2.normalize(test_hist, None)
+test_flat_hist = test_normalized.flatten()
