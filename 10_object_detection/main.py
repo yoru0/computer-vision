@@ -54,7 +54,10 @@ for img_name in os.listdir(test_path):
 
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
         text = f"{person_names[label]}: {confidence:.2f}"
-        cv2.putText(img, text, (x, y - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
-    cv2.imshow("Face Recognition", img)
+        cv2.putText(
+            img, text, (x, y - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2
+        )
+        cv2.imshow("Result", img)
+
     cv2.waitKey(0)
 cv2.destroyAllWindows()
