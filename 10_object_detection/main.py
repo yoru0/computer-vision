@@ -34,3 +34,19 @@ for idx, name in enumerate(person_names):
 # Face Detection (Testing)
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 recognizer.train(face_list, np.array(label_list))
+
+test_path = "./dataset/test"
+for img_name in os.listdir(test_path):
+    img_path = f"{test_path}/{img_name}"
+    img = cv2.imread(img_path)
+    img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    detected_faces = face_cascade.detectMultiScale(img_gray)
+
+    if len(detected_faces) < 1:
+        continue
+
+    for face in detected_faces:
+        x, y, h, w = face
+        face_img = img_gray[y : y + h, x : x + w]
+        
