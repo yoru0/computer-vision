@@ -51,7 +51,7 @@ def train_test_model():
             if len(detected_faces) < 1:
                 continue
 
-            for x, w, y, h in detected_faces:
+            for x, y, w, h in detected_faces:
                 face_img = gray[y : y + h, x : x + w]
                 predict_label, _ = face_recognizer.predict(face_img)
 
@@ -94,11 +94,14 @@ def predict_picture():
 
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 1)
         text = name + " " + str(conf)
-        cv2.putText(img, text, (x, y-10), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 1)
+        cv2.putText(
+            img, text, (x, y - 10), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 1
+        )
 
     cv2.imshow("Result", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
 
 def menu():
     while True:
@@ -108,11 +111,12 @@ def menu():
 
         opt = input("Enter your choice: ")
 
-        if opt == '1':
+        if opt == "1":
             train_test_model()
-        elif opt == '2':
+        elif opt == "2":
             predict_picture()
-        elif opt == '3':
+        elif opt == "3":
             break
+
 
 menu()
