@@ -104,11 +104,14 @@ def predict_picture():
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 1)
         text = name + " " + str(conf)
 
-        cv2.putText(img, text, (x, y - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2)
+        cv2.putText(
+            img, text, (x, y - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 0), 2
+        )
 
     cv2.imshow("Prediction", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
 
 def menu():
     while True:
@@ -126,5 +129,6 @@ def menu():
             break
         else:
             print("Invalid choice. Please try again.")
+
 
 menu()
